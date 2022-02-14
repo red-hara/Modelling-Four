@@ -1,0 +1,126 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://models/Robot/Connector.obj" type="ArrayMesh" id=1]
+[ext_resource path="res://models/Robot/ForearmConnector.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://models/Robot/Base.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://models/Robot/Forearm.obj" type="ArrayMesh" id=4]
+[ext_resource path="res://models/Robot/Shoulder.obj" type="ArrayMesh" id=5]
+[ext_resource path="res://models/Robot/Column.obj" type="ArrayMesh" id=6]
+[ext_resource path="res://models/Robot/Flange.obj" type="ArrayMesh" id=7]
+[ext_resource path="res://models/Robot/Mover.obj" type="ArrayMesh" id=8]
+[ext_resource path="res://models/Robot/ColumnConnector.obj" type="ArrayMesh" id=9]
+[ext_resource path="res://models/Robot/Wrist.obj" type="ArrayMesh" id=10]
+[ext_resource path="res://models/Robot/WristConnector.obj" type="ArrayMesh" id=11]
+[ext_resource path="res://prefab/Robot/Robot.cs" type="Script" id=12]
+
+[node name="Robot" type="Spatial"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 12 )
+column = NodePath("Base/Column")
+shoulder = NodePath("Base/Column/Shoulder")
+forearm = NodePath("Base/Column/Shoulder/Forearm")
+wrist = NodePath("Base/Column/Shoulder/Forearm/Wrist")
+flange = NodePath("Base/Column/Shoulder/Forearm/Wrist/Flange")
+connector = NodePath("Base/Column/Shoulder/Connector")
+wristConnector = NodePath("Base/Column/Shoulder/Connector/WristConnector")
+mover = NodePath("Base/Column/Mover")
+forearmConnector = NodePath("Base/Column/Mover/ForearmConnector")
+columnConnector = NodePath("Base/Column/ColumnConnector")
+end = NodePath("")
+
+[node name="Base" type="Spatial" parent="."]
+
+[node name="Base" type="MeshInstance" parent="Base"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = ExtResource( 3 )
+skeleton = NodePath("../..")
+material/0 = null
+
+[node name="Column" type="Spatial" parent="Base"]
+
+[node name="Column" type="MeshInstance" parent="Base/Column"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+mesh = ExtResource( 6 )
+skeleton = NodePath("../../..")
+material/0 = null
+
+[node name="Shoulder" type="Spatial" parent="Base/Column"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 7.62939e-06, 800 )
+
+[node name="Shoulder" type="MeshInstance" parent="Base/Column/Shoulder"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -300, 0, -800 )
+mesh = ExtResource( 5 )
+skeleton = NodePath("../../../..")
+material/0 = null
+
+[node name="Forearm" type="Spatial" parent="Base/Column/Shoulder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1280 )
+
+[node name="Forearm" type="MeshInstance" parent="Base/Column/Shoulder/Forearm"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -300, 0, -2080 )
+mesh = ExtResource( 4 )
+skeleton = NodePath("../../../../..")
+material/0 = null
+
+[node name="Wrist" type="Spatial" parent="Base/Column/Shoulder/Forearm"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1350, 0, 0 )
+
+[node name="Wrist" type="MeshInstance" parent="Base/Column/Shoulder/Forearm/Wrist"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1650, 0, -2080 )
+mesh = ExtResource( 10 )
+skeleton = NodePath("../../../../../..")
+material/0 = null
+
+[node name="Flange" type="Spatial" parent="Base/Column/Shoulder/Forearm/Wrist"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, -247 )
+
+[node name="Flange" type="MeshInstance" parent="Base/Column/Shoulder/Forearm/Wrist/Flange"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1910, 0, -1833 )
+mesh = ExtResource( 7 )
+skeleton = NodePath("../../../../../../..")
+material/0 = null
+
+[node name="Connector" type="Spatial" parent="Base/Column/Shoulder"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1280 )
+
+[node name="Connector" type="MeshInstance" parent="Base/Column/Shoulder/Connector"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -300, 0, -2080 )
+mesh = ExtResource( 1 )
+skeleton = NodePath("../../../../..")
+material/0 = null
+
+[node name="WristConnector" type="Spatial" parent="Base/Column/Shoulder/Connector"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 300 )
+
+[node name="WristConnector" type="MeshInstance" parent="Base/Column/Shoulder/Connector/WristConnector"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -800, 0, -2380 )
+mesh = ExtResource( 11 )
+skeleton = NodePath("../../../../../..")
+material/0 = null
+
+[node name="Mover" type="Spatial" parent="Base/Column"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 800 )
+
+[node name="Mover" type="MeshInstance" parent="Base/Column/Mover"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -300, 0, -800 )
+mesh = ExtResource( 8 )
+skeleton = NodePath("../../../..")
+material/0 = null
+
+[node name="ForearmConnector" type="Spatial" parent="Base/Column/Mover"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -600, 0, 0 )
+
+[node name="ForearmConnector" type="MeshInstance" parent="Base/Column/Mover/ForearmConnector"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 300, 0, -800 )
+mesh = ExtResource( 2 )
+skeleton = NodePath("../../../../..")
+material/0 = null
+
+[node name="ColumnConnector" type="Spatial" parent="Base/Column"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 1000 )
+
+[node name="ColumnConnector" type="MeshInstance" parent="Base/Column/ColumnConnector"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 100, 0, -1000 )
+mesh = ExtResource( 9 )
+skeleton = NodePath("../../../..")
+material/0 = null

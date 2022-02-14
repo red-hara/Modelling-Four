@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Axis.obj-6ad31fe4c784f1a98660933cd9b5ecd0.mesh"
+
+[deps]
+
+files=[ "res://.import/Axis.obj-6ad31fe4c784f1a98660933cd9b5ecd0.mesh" ]
+
+source_file="res://models/Axis/Axis.obj"
+dest_files=[ "res://.import/Axis.obj-6ad31fe4c784f1a98660933cd9b5ecd0.mesh", "res://.import/Axis.obj-6ad31fe4c784f1a98660933cd9b5ecd0.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/Forearm.obj-f2c149fe5cefb26170efd3c09fff7008.mesh"
+
+[deps]
+
+files=[ "res://.import/Forearm.obj-f2c149fe5cefb26170efd3c09fff7008.mesh" ]
+
+source_file="res://models/Robot/Forearm.obj"
+dest_files=[ "res://.import/Forearm.obj-f2c149fe5cefb26170efd3c09fff7008.mesh", "res://.import/Forearm.obj-f2c149fe5cefb26170efd3c09fff7008.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
