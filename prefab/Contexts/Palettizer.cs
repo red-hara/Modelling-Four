@@ -13,11 +13,12 @@ public class Palettizer : Context
     public void PreparePath()
     {
         InputWait(KeyList.Space);
-        Joint(new Target4(new Pose4(new Vector3(0, 0, 500), 90), 0), 0.5f);
+        Joint(new Target4(new Pose4(new Vector3(0, 0, 750), 90), 0), 0.25f);
         ContextCommand<Palettizer>((palettizer) =>
         {
             GetNode<Gripper>(tool).Open();
         });
+        Joint(new Target4(new Pose4(new Vector3(0, 0, 500), 90), 0), 0.25f);
         WaitFor(
             () =>
             {

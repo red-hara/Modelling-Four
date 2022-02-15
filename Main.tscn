@@ -13,6 +13,11 @@ albedo_color = Color( 0, 1, 0, 1 )
 
 [node name="Main" type="Spatial"]
 
+[node name="FlyingCamera" parent="." instance=ExtResource( 3 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2353.29, 701.454, -3.72985e-05 )
+alpha = 90.0
+angularVelocity = 30.0
+
 [node name="Palettizer" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -2000, 800, 0 )
 end = NodePath("Gripper")
@@ -34,24 +39,31 @@ material_override = SubResource( 1 )
 script = ExtResource( 5 )
 
 [node name="Gripper" parent="Palettizer" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1910, 0.00045538, 1833 )
-
-[node name="Decor" type="Spatial" parent="Palettizer"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 2000, 3.49691e-05, -800 )
-
-[node name="CSGBox" type="CSGBox" parent="Palettizer/Decor"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2000, 400, 0 )
-width = 1600.0
-height = 800.0
-depth = 1600.0
-
-[node name="FlyingCamera" parent="." instance=ExtResource( 3 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2353.29, 701.454, -3.72985e-05 )
-alpha = 90.0
-angularVelocity = 30.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1910, -0.000455379, 1833 )
 
 [node name="Box" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125, 125, -200 )
 width = 250.0
 height = 250.0
 depth = 400.0
+
+[node name="Decor" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.81899e-11 )
+
+[node name="Floor" type="CSGBox" parent="Decor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+width = 16000.0
+depth = 16000.0
+
+[node name="CSGBox" type="CSGBox" parent="Decor"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2000, 400, 0 )
+width = 1600.0
+height = 800.0
+depth = 1600.0
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Decor"]
+transform = Transform( 0.433013, 0.866026, -0.25, 0.5, -2.18557e-08, 0.866025, 0.75, -0.5, -0.433013, 0, 0, 0 )
+shadow_enabled = true
+shadow_bias = 5.0
+directional_shadow_depth_range = 1
+directional_shadow_max_distance = 10000.0
