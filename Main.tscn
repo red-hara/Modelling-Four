@@ -26,7 +26,7 @@ end = NodePath("Gripper")
 script = ExtResource( 4 )
 originPosition = Vector3( -2000, 0, 800 )
 tool = NodePath("../Gripper")
-attachable = NodePath("../../Box")
+attachablePath = NodePath("../../Box")
 
 [node name="Controller" type="Node" parent="Palettizer"]
 script = ExtResource( 2 )
@@ -39,7 +39,7 @@ material_override = SubResource( 1 )
 script = ExtResource( 5 )
 
 [node name="Gripper" parent="Palettizer" instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1910, -0.000455379, 1833 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1910, 0, 1833 )
 
 [node name="Box" type="CSGBox" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 125, 125, -200 )
