@@ -23,7 +23,7 @@ public struct Pose4
     /// <summary>Calculate inverse pose <c>P^-1</c> such that <c>P * P^-1 = new
     /// Pose4(new vector3(0, 0, 0), 0)</c>.</summary>
     /// <returns>A <c>Pose4</c> such, that combining it with the original will
-    /// yeld zero translation and zero rotation.</summary>
+    /// yeld zero translation and zero rotation.</returns>
     public Pose4 Inverse()
     {
         return new Pose4(

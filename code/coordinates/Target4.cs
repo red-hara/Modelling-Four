@@ -9,7 +9,7 @@ public struct Target4
     public int flangeRevolutions;
 
     /// <summary>Create new <c>Target4</c> instance.</summary>
-    /// <param name="pose">The target pose.</summary>
+    /// <param name="pose">The target pose.</param>
     /// <param name="flangeRevolutions">The number of full flange
     /// revolutions.</param>
     public Target4(Pose4 pose, int flangeRevolutions)
