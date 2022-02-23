@@ -181,12 +181,12 @@ public class Robot : Spatial, Controllable
 
     public Target4? Forward(Generalized4 generalized)
     {
-        return CalculateForward(generalized);
+        return CalculateForward(targetGeneralized);
     }
 
     public Generalized4 GetCurrentJoints()
     {
-        return generalized;
+        return targetGeneralized;
     }
 
     public Generalized4? SetPosition(Target4 position)

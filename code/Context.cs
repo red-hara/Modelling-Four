@@ -1,11 +1,12 @@
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using Godot;
 
 /// <summary>The robot execution context.</summary>
 public class Context : Node
 {
-    /// <summary>List on enqueued commands.</summary>
-    public Queue<Command> commands = new Queue<Command>();
+    [Export]
+    public NodePath controller;
+    private Controller control;
 
     [Export]
     public Vector3 originPosition;
@@ -39,12 +40,19 @@ public class Context : Node
         get => GetToolCenterPoint();
     }
 
-    /// <summary>Add command to the command list.</summary>
-    /// <param name="command">The <c>Command</c> to be enqueued.</param>
-    public void AddCommand(Command command)
+    private Task task;
+
+    public override void _EnterTree()
     {
-        commands.Enqueue(command);
+        control = GetNode<Controller>(controller);
+        task = Run();
     }
+
+    public async virtual Task Run()
+    {
+        await Task.Delay(0);
+    }
+
 
     /// <summary>Get current TCP geometry.</summary>
     /// <returns>TCP in relation to the flange.</returns>
@@ -85,53 +93,48 @@ public class Context : Node
         return pt.GetOrigin();
     }
 
-    /// <summary>Enqueue <c>Linear</c> command.</summary>
-    /// <param name="target">Target <c>Pose4</c> for this motion.</param>
-    /// <param name="linearVelocity">Maximum motion linear velocity, millimeter
-    /// per second.</param>
-    /// <param name="angularVelocity">Maximum motion angular velocity, degree
-    /// per second.</param>
-    public void Linear(
+    public async Task<Controller.CompletionStatus> SpawnCommand(Command command)
+    {
+        command.Init(control.Controllable, this);
+        return await control.SpawnCommand(command);
+    }
+    public async Task<Controller.CompletionStatus> Linear(
         Pose4 target,
         float linearVelocity,
         float angularVelocity
     )
     {
-        AddCommand(new Linear(target, linearVelocity, angularVelocity));
+        return await SpawnCommand(
+            new Linear(target, linearVelocity, angularVelocity)
+        );
     }
 
-    /// <summary>Enqueue <c>Joint</c> command.</summary>
-    /// <param name="target">Target <c>Target4</c> for this motion.</param>
-    /// <param name="velocity">Motion velocity, fraction, in (1, 0]
-    /// range.<param>
-    public void Joint(
+    public async Task<Controller.CompletionStatus> Joint(
         Target4 target,
-        float velocity
+        float speed
     )
     {
-        AddCommand(new Joint(target, velocity));
+        return await SpawnCommand(new Joint(target, speed));
     }
 
-    /// <summary>Enqueue <c>ContextCommand</c> command.</summary>
-    /// <param name="command">The <c>UpdateContext</c> delegate to be called on
-    /// this <c>Context</c>.</param>
-    public void ContextCommand<T>(ContextCommand<T>.UpdateContext command)
-    where T : Context
+    public async Task<Controller.CompletionStatus> InputWait(KeyList key)
     {
-        AddCommand(new ContextCommand<T>(command));
+        return await SpawnCommand(new InputWait(key));
     }
 
-    /// <summary>Enqueue <c>InputWait</c> command.</summary>
-    /// <param name="key">The key (from the <c>KeyList</c>) to wait for.</param>
-    public void InputWait(KeyList key)
+    public async Task<Controller.CompletionStatus> ContextCommand<T>(
+        ContextCommand<T>.UpdateContext command
+    )
+    where
+        T : Context
     {
-        AddCommand(new InputWait(key));
+        return await SpawnCommand(new ContextCommand<T>(command));
     }
 
-    /// <summary>Enqueue <c>WaitFor</c> command.</summary>
-    /// <param name="condition">The condition to be met to continue.</param>
-    public void WaitFor(WaitFor.Condition condition)
+    public async Task<Controller.CompletionStatus> WaitFor(
+        WaitFor.Condition condition
+    )
     {
-        AddCommand(new WaitFor(condition));
+        return await SpawnCommand(new WaitFor(condition));
     }
 }

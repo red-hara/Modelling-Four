@@ -37,6 +37,7 @@ skeleton = NodePath("../..")
 material/0 = null
 
 [node name="Column" type="Spatial" parent="Base"]
+transform = Transform( 1, 2.38419e-07, 0, -2.38419e-07, 1, 0, 0, 0, 1, 0, 0, 0 )
 
 [node name="Column" type="MeshInstance" parent="Base/Column"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -45,7 +46,7 @@ skeleton = NodePath("../../..")
 material/0 = null
 
 [node name="Shoulder" type="Spatial" parent="Base/Column"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 7.62939e-06, 800 )
+transform = Transform( 1, 0, -2.38419e-07, 0, 1, 0, 2.38419e-07, 0, 1, 300, 7.62939e-06, 800 )
 
 [node name="Shoulder" type="MeshInstance" parent="Base/Column/Shoulder"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -300, 0, -800 )
@@ -63,7 +64,7 @@ skeleton = NodePath("../../../../..")
 material/0 = null
 
 [node name="Wrist" type="Spatial" parent="Base/Column/Shoulder/Forearm"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1350, 0, 0 )
+transform = Transform( 1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 1350, 0, 0 )
 
 [node name="Wrist" type="MeshInstance" parent="Base/Column/Shoulder/Forearm/Wrist"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1650, 0, -2080 )
@@ -72,7 +73,7 @@ skeleton = NodePath("../../../../../..")
 material/0 = null
 
 [node name="Flange" type="Spatial" parent="Base/Column/Shoulder/Forearm/Wrist"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 260, 0, -247 )
+transform = Transform( 1, 2.38419e-07, 0, -2.38419e-07, 1, 0, 0, 0, 1, 260, 0, -247 )
 
 [node name="Flange" type="MeshInstance" parent="Base/Column/Shoulder/Forearm/Wrist/Flange"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1910, 0, -1833 )
@@ -81,7 +82,7 @@ skeleton = NodePath("../../../../../../..")
 material/0 = null
 
 [node name="Connector" type="Spatial" parent="Base/Column/Shoulder"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1280 )
+transform = Transform( 1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 0, 0, 1280 )
 
 [node name="Connector" type="MeshInstance" parent="Base/Column/Shoulder/Connector"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -300, 0, -2080 )
@@ -90,7 +91,7 @@ skeleton = NodePath("../../../../..")
 material/0 = null
 
 [node name="WristConnector" type="Spatial" parent="Base/Column/Shoulder/Connector"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 500, 0, 300 )
+transform = Transform( 1, 0, -2.38419e-07, 0, 1, 0, 2.38419e-07, 0, 1, 500, 0, 300 )
 
 [node name="WristConnector" type="MeshInstance" parent="Base/Column/Shoulder/Connector/WristConnector"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -800, 0, -2380 )
@@ -99,7 +100,7 @@ skeleton = NodePath("../../../../../..")
 material/0 = null
 
 [node name="Mover" type="Spatial" parent="Base/Column"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 300, 0, 800 )
+transform = Transform( 1, 0, -2.38419e-07, 0, 1, 0, 2.38419e-07, 0, 1, 300, 0, 800 )
 
 [node name="Mover" type="MeshInstance" parent="Base/Column/Mover"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -300, 0, -800 )
@@ -117,7 +118,7 @@ skeleton = NodePath("../../../../..")
 material/0 = null
 
 [node name="ColumnConnector" type="Spatial" parent="Base/Column"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 1000 )
+transform = Transform( 1, 0, -2.38419e-07, 0, 1, 0, 2.38419e-07, 0, 1, -100, 0, 1000 )
 
 [node name="ColumnConnector" type="MeshInstance" parent="Base/Column/ColumnConnector"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 100, 0, -1000 )
