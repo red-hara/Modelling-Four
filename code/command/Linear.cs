@@ -28,11 +28,11 @@ public class Linear : Command
     private float progress;
 
     /// <summary>Create new <c>Linear</c> command.</summary>
-    /// <param name="target">Target robot pose.</summary>
+    /// <param name="target">Target robot pose.</param>
     /// <param name="linearVelocity">Maximum linear velocity during motion
-    /// execution, millimeter per second.</summary>
+    /// execution, millimeter per second.</param>
     /// <param name="angularVelocity">Maximum angular velocity during motion
-    /// execution, degree per second.</summary>
+    /// execution, degree per second.</param>
     public Linear(Pose4 target, float linearVelocity, float angularVelocity)
     {
         // Note that the target is Pose4, not Target4. That is due to the robot

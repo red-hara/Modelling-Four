@@ -10,7 +10,7 @@ public class ContextCommand<T> : Command where T : Context
 
     /// <summary>Create new <c>ContexCommand</c>.</summary>
     /// <param name="updater">The delegate to be called durinc this command
-    /// execution.</summary>
+    /// execution.</param>
     public ContextCommand(UpdateContext updater)
     {
         this.updater = updater;
