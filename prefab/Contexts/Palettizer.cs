@@ -3,26 +3,44 @@ using Godot;
 
 public class Palettizer : Context
 {
-    [Export]
-    public NodePath attachablePath;
+    public static Target4 transition = new Target4(
+        new Pose4(new Vector3(0, 0, 1500), 0),
+        0
+    );
 
-    private Spatial attachable;
+    [Export]
+    public NodePath attachables;
+    private Node attachablesCollection;
+    private Spatial currentAttachable;
     public override void _Ready()
     {
-        attachable = GetNode<Spatial>(attachablePath);
+        attachablesCollection = GetNode<Node>(attachables);
     }
 
     override public async Task Run()
     {
         await InputWait(KeyList.Space);
-        await Pick(new Pose4(new Vector3(0, 0, 0), 90));
-        for (int i = 0; i < 3; ++i)
+
+        for (int index = 0; index < 4; index++)
         {
-            Pose4 target = new Pose4(new Vector3(250, -1000, 500), i * 120);
-            await Place(target);
-            await Pick(target);
+            currentAttachable = attachablesCollection.GetChild<Spatial>(0);
+            await Pick(new Pose4(
+                currentAttachable.Translation,
+                90 + currentAttachable.RotationDegrees.z
+            ));
+            await Joint(
+                transition,
+                0.25f
+            );
+            await Place(new Pose4(
+                new Vector3(250, -1000, 500 + index * 250),
+                0
+            ));
+            await Joint(
+                transition,
+                0.25f
+            );
         }
-        await Place(new Pose4(new Vector3(250, -1000, 500), 0));
     }
 
     public async Task Pick(Pose4 targetPose)
@@ -42,7 +60,7 @@ public class Palettizer : Context
         {
             return GetNode<Gripper>(tool).CurrentState == Gripper.State.Closed;
         });
-        Attach(attachable);
+        Attach(attachablesCollection.GetChild<Spatial>(0));
         await Linear(
             targetPose * new Pose4(new Vector3(0, 0, 300), 0),
             250,
@@ -63,7 +81,7 @@ public class Palettizer : Context
         {
             return GetNode<Gripper>(tool).CurrentState == Gripper.State.Open;
         });
-        Detach(attachable);
+        Detach(currentAttachable);
         await Linear(
             targetPose * new Pose4(new Vector3(0, 0, 300), 0),
             250,

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Godot;
 
@@ -8,9 +9,14 @@ public class Controller : Node
     /// <summary>Current command to be polled during execution.</summary>
     private Command currentCommand;
 
+    private Queue<(Command, TaskCompletionSource<CompletionStatus>)> next =
+        new Queue<(Command, TaskCompletionSource<CompletionStatus>)>();
+
     private TaskCompletionSource<CompletionStatus> actionCompletionSource;
 
     private CompletionStatus? status;
+
+    private Context context;
 
     /// <summary>Path to the <c>Controllable</c> node.</summary>
     [Export]
@@ -47,13 +53,28 @@ public class Controller : Node
                     break;
             }
         }
+        else if (next.Count > 0)
+        {
+            (Command, TaskCompletionSource<CompletionStatus>) data =
+                next.Dequeue();
+            currentCommand = data.Item1;
+            currentCommand.Init(Controllable, context);
+            actionCompletionSource = data.Item2;
+
+        }
     }
 
-    public Task<CompletionStatus> SpawnCommand(Command command)
+    public void Init(Context context)
     {
-        currentCommand = command;
-        actionCompletionSource = new TaskCompletionSource<CompletionStatus>();
-        return actionCompletionSource.Task;
+        this.context = context;
+    }
+
+    public Task<CompletionStatus> EnqueueCommand(Command command)
+    {
+        TaskCompletionSource<CompletionStatus> source =
+            new TaskCompletionSource<CompletionStatus>();
+        next.Enqueue((command, source));
+        return source.Task;
     }
 
     public enum CompletionStatus

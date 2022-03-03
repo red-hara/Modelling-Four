@@ -45,6 +45,7 @@ public class Context : Node
     public override void _EnterTree()
     {
         control = GetNode<Controller>(controller);
+        control.Init(this);
         task = Run();
     }
 
@@ -95,8 +96,7 @@ public class Context : Node
 
     public async Task<Controller.CompletionStatus> SpawnCommand(Command command)
     {
-        command.Init(control.Controllable, this);
-        return await control.SpawnCommand(command);
+        return await control.EnqueueCommand(command);
     }
     public async Task<Controller.CompletionStatus> Linear(
         Pose4 target,
