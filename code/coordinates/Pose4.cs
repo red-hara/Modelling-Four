@@ -1,7 +1,7 @@
 using Godot;
 
 /// <summary>4-DoF pose representation. Stores consecutive translation by
-/// <c>position</c> and <c>rotation</c> around local Z axis.<summary>
+/// <c>position</c> and <c>rotation</c> around local Z axis.</summary>
 public struct Pose4
 {
     /// <summary>The position part of this pose, millimeters.</summary>
