@@ -4,16 +4,22 @@ using Godot;
 /// <summary>The robot execution context.</summary>
 public class Context : Node
 {
+    /// <summary>Path to the robot <c>Controller</c>.</summary>
     [Export]
     public NodePath controller;
+
+    /// <summary>Robot <c>Controller</c> instance.</summary>
     private Controller control;
 
+    /// <summary>Robot's translation in relation to the world origin.</summary>
     [Export]
     public Vector3 originPosition;
 
+    /// <summary>Robot's rotation in relation to the world origin.</summary>
     [Export]
     public float originAngle;
 
+    /// <summary>Robot's Pose in relation to the world origin.</summary>
     public Pose4 Origin
     {
         get => new Pose4(originPosition, originAngle);
@@ -40,6 +46,7 @@ public class Context : Node
         get => GetToolCenterPoint();
     }
 
+    /// <summary>Internal <c>Run</c> <c>Task</c> storage.</summary>
     private Task task;
 
     public override void _EnterTree()
