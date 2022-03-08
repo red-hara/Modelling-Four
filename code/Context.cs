@@ -101,10 +101,13 @@ public class Context : Node
         return pt.GetOrigin();
     }
 
+    /// <summary>Enqueue given command.</summary>
     public async Task<Controller.CompletionStatus> SpawnCommand(Command command)
     {
         return await control.EnqueueCommand(command);
     }
+
+    /// <summary>Enqueue linear command.</summary>
     public async Task<Controller.CompletionStatus> Linear(
         Pose4 target,
         float linearVelocity,
@@ -116,6 +119,7 @@ public class Context : Node
         );
     }
 
+    /// <summary>Enqueue joint command.</summary>
     public async Task<Controller.CompletionStatus> Joint(
         Target4 target,
         float speed
@@ -124,11 +128,13 @@ public class Context : Node
         return await SpawnCommand(new Joint(target, speed));
     }
 
+    /// <summary>Enqueue <c>InputWait</c> command.</summary>
     public async Task<Controller.CompletionStatus> InputWait(KeyList key)
     {
         return await SpawnCommand(new InputWait(key));
     }
 
+    /// <summary>Enqueue <c>ContextCommand</c>.</summary>
     public async Task<Controller.CompletionStatus> ContextCommand<T>(
         ContextCommand<T>.UpdateContext command
     )
@@ -138,6 +144,7 @@ public class Context : Node
         return await SpawnCommand(new ContextCommand<T>(command));
     }
 
+    /// <summary>Enqueue <c>WaitFor</c> command.</summary>
     public async Task<Controller.CompletionStatus> WaitFor(
         WaitFor.Condition condition
     )
